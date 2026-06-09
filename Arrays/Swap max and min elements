@@ -1,0 +1,112 @@
+1.Write a function to swap the max and min numbers of an array
+
+         [My approach]
+int main(){
+    int arr[5]={24,38,78,6,7};
+    int size=5,i,j,max=arr[0],min=arr[0],index_max,index_min;
+    // max
+    for(i=0;i<size;i++){
+        if(arr[i]>max){
+            max = arr[i];
+            index_max=i;
+        }
+    }
+    cout<<"The max element is : "<<max<<"\n"<<index_max<<endl;
+
+    // min
+    for(j=0;j<size;j++){
+        if(arr[j]<min){
+            min= arr[j];
+            index_min=j;
+        }
+    }
+    cout<<"The min element is : "<<min<<"\n"<<index_min<<endl;
+
+    //Swapping
+    swap(arr[index_max],arr[index_min]);
+    cout<<"The final array we got is follows: "<<endl;
+
+    for(int z=0;z<5;z++){
+        cout<<arr[z]<<endl;
+    }
+    return 0;
+
+}
+
+    [Chat gpt approach]
+#include <iostream>
+using namespace std;
+
+void swapMaxMin(int arr[], int size) {
+    int maxIndex = 0;
+    int minIndex = 0;
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > arr[maxIndex]) {
+            maxIndex = i;
+        }
+
+        if (arr[i] < arr[minIndex]) {
+            minIndex = i;
+        }
+    }
+
+    swap(arr[maxIndex], arr[minIndex]);
+}
+
+int main() {
+    int arr[] = {24, 38, 78, 6, 7};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    swapMaxMin(arr, size);
+
+    cout << "Array after swapping:\n";
+
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+
+
+
+2.Write a program to calculate sum and product of all numbers in an array
+[simple]
+
+int main(){
+    int arr[5]={2,3,4,5,6};
+    int size,sum=0;
+    size=sizeof(arr)/sizeof(int);
+    for(int i=0;i<size;i++){
+        sum +=arr[i];
+
+    }
+    cout<<"The sum of the elements in an array is : "<<sum<<endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
