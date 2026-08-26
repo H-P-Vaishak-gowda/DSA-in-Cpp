@@ -1,3 +1,5 @@
+1.Two Pointer Approach
+
 class Solution {
 public:
     void reverseInGroups(vector<int> &arr, int k) {
@@ -18,6 +20,8 @@ public:
     
 };
 
+2.Using std::reverse()
+
 class Solution {
 public:
     void reverseInGroups(vector<int> &arr, int k) {
@@ -29,3 +33,8 @@ public:
         }
     }
 };
+
+
+Method	Time	Space	Recommendation
+std::reverse()	O(n)	O(1)	⭐ Best/cleanest
+Two pointers	O(n)	O(1)	⭐ Best for DSA
