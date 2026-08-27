@@ -1,0 +1,125 @@
+Attempt-01 [passed 1028/1115 Test cases]
+class Solution {
+	public:
+	void rotateArr(vector<int>& arr, int d) {
+		int n = arr.size();
+		int k = d%n;
+		
+		while (k>0) {
+			int start = arr[0];
+			for (int i = 0; i<n - 1; i++) {
+				
+				arr[i] = arr[i + 1];
+			}
+			arr[n - 1] = start;
+			k--;
+		}
+		
+	}
+};
+
+
+Attempt-02 [passed all the test cases]
+
+class Solution {
+  public:
+    void rotateArr(vector<int>& arr, int d) {
+        int n=arr.size();
+        int k=d%n;
+        vector<int>temp=arr;
+        int z=0;
+        for(int i=0;i<n;i++){
+            
+            if(i+k<n){
+                arr[i]=temp[i+k];
+            }
+            else{
+                arr[i]=temp[z];
+                z+=1;
+            }
+            
+        }
+    }
+};
+
+Complexity
+Time: O(n)
+Space: O(n) because of vector<int> temp.
+
+
+---------------------------------------------Chat-gpt solutions------------------------------------------------------------
+1.
+class Solution {
+public:
+    void rotateArr(vector<int>& arr, int d) {
+        int n = arr.size();
+        int k = d % n;
+
+        vector<int> temp = arr;
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = temp[(i + k) % n];
+        }
+    }
+};
+
+2. Reversal Algorithm — ⭐ Best choice
+class Solution {
+public:
+    void rotateArr(vector<int>& arr, int d) {
+        int n = arr.size();
+        d = d % n;
+
+        reverse(arr.begin(), arr.begin() + d);
+        reverse(arr.begin() + d, arr.end());
+        reverse(arr.begin(), arr.end());
+    }
+};
+
+3.std::rotate() — Simplest
+class Solution {
+public:
+    void rotateArr(vector<int>& arr, int d) {
+        int n = arr.size();
+        d = d % n;
+
+        rotate(arr.begin(), arr.begin() + d, arr.end());
+    }
+};
+
+4.juggling Algorithm — O(1) Space
+class Solution {
+public:
+    void rotateArr(vector<int>& arr, int d) {
+        int n = arr.size();
+        d %= n;
+
+        int g = gcd(n, d);
+
+        for (int i = 0; i < g; i++) {
+            int temp = arr[i];
+            int j = i;
+
+            while (true) {
+                int k = (j + d) % n;
+
+                if (k == i)
+                    break;
+
+                arr[j] = arr[k];
+                j = k;
+            }
+
+            arr[j] = temp;
+        }
+    }
+};
+
+TC:
+| Method             |     Time | Extra Space | Difficulty |
+| ------------------ | -------: | ----------: | ---------- |
+| Your `temp` method |   `O(n)` |      `O(n)` | Easy       |
+| `std::rotate()`    |   `O(n)` |      `O(1)` | Very easy  |
+| **Reversal**       | **O(n)** |    **O(1)** | **Easy** ⭐ |
+| Juggling           |   `O(n)` |      `O(1)` | Medium     |
+
