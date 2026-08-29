@@ -1,0 +1,40 @@
+1.Two Pointer Approach
+
+class Solution {
+public:
+    void reverseInGroups(vector<int> &arr, int k) {
+        int n = arr.size();
+
+        for (int i = 0; i < n; i += k) {
+            int st = i;
+            int end = min(i + k - 1, n - 1);
+
+            while (st < end) {
+                swap(arr[st], arr[end]);
+                st++;
+                end--;
+            }
+        }
+    }
+
+    
+};
+
+2.Using std::reverse()
+
+class Solution {
+public:
+    void reverseInGroups(vector<int> &arr, int k) {
+        int n = arr.size();
+
+        for (int i = 0; i < n; i += k) {
+            int end = min(i + k, n);
+            reverse(arr.begin() + i, arr.begin() + end);
+        }
+    }
+};
+
+
+Method	Time	Space	Recommendation
+std::reverse()	O(n)	O(1)	⭐ Best/cleanest
+Two pointers	O(n)	O(1)	⭐ Best for DSA
