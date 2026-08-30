@@ -1,0 +1,100 @@
+1.
+Passed test cases -1110/1111
+
+class Solution {
+	public:
+	vector<int> leaders(vector<int>& arr) {
+		int n = arr.size();
+		vector<int> ans;
+		int i,j;
+		bool small=false;
+		
+		if(n==2){
+		    
+		    if(arr[0]>arr[1] || arr[0]==arr[1]){
+		        return arr;
+		    }
+		    ans.push_back(arr[1]);
+		    return ans;
+	
+		}
+		
+		
+		
+		for (i = 0; i<n; i++) {
+			for ( j = i; j<n; j++) {
+				
+				if (arr[i]<arr[j]) {
+					small=true;
+					break;
+				}
+				
+			}
+			if(small != true){
+			    ans.push_back(arr[i]);
+			}
+			small=false;
+		}
+		
+		if(ans.size()==0){
+		    ans.push_back(arr[n-1]);
+		}
+		
+	
+		return ans;
+		
+	}
+};
+
+-------------------------------------------------------------------------------------------------------------------------
+2.
+class Solution {
+public:
+    vector<int> leaders(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> ans;
+
+        for (int i = 0; i < n; i++) {
+            bool small = false;
+
+            for (int j = i + 1; j < n; j++) {
+
+                if (arr[i] < arr[j]) {
+                    small = true;
+                    break;
+                }
+            }
+
+            if (small == false) {
+                ans.push_back(arr[i]);
+            }
+        }
+
+        return ans;
+    }
+};
+
+-------------------------------------------------------------------------------------------------------------------------
+3. TC-O(n)
+
+class Solution {
+public:
+    vector<int> leaders(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> ans;
+
+        int maxRight = arr[n - 1];
+        ans.push_back(maxRight);
+
+        for (int i = n - 2; i >= 0; i--) {
+            if (arr[i] >= maxRight) {
+                maxRight = arr[i];
+                ans.push_back(arr[i]);
+            }
+        }
+
+        reverse(ans.begin(), ans.end());
+
+        return ans;
+    }
+};
