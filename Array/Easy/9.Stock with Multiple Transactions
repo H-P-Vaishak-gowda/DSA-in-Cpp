@@ -1,0 +1,58 @@
+1.
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+
+        int buy = INT_MAX;
+        int sell = 0;
+        int profit = 0;
+        int total_profit = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+
+            // Buy at the lowest price
+            buy = min(buy, prices[i]);
+
+            // If tomorrow's price is lower,
+            // today's price is the selling point
+            if (prices[i] > prices[i+1]) {
+                sell = prices[i];
+
+                profit = sell - buy;
+                total_profit += profit;
+
+                // Reset for next transaction
+                buy = INT_MAX;
+                sell = 0;
+                profit = 0;
+            }
+        }
+
+        // Handle the final increasing sequence
+        sell = prices[n - 1];
+
+        if (buy != INT_MAX) {
+            profit = sell - buy;
+            total_profit += profit;
+        }
+
+        return total_profit;
+    }
+};
+--------------------------------------------------------------------------------------------------------------------------
+2.
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int total_profit = 0;
+
+        for (int i = 0; i < prices.size() - 1; i++) {
+            if (prices[i ] < prices[i+1]) {
+                total_profit += prices[i + 1] - prices[i];
+            }
+        }
+
+        return total_profit;
+    }
+};
