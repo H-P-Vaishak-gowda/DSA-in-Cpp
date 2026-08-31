@@ -1,0 +1,53 @@
+class Solution {
+	public:
+	bool isSubSeq(string& s1, string& s2) {
+		
+		int n = s1.size();
+		int k = s2.size();
+		string ans= "";
+		int add=0;
+		
+		
+		for (int i = 0; i<n;i++) {
+			
+			for (int j = add; j<k; j++) {
+				
+				if(s2[j]==s1[i]){
+				    ans+=s2[j];
+				    add=j+1;
+				    break;
+				}
+				
+			}
+		}
+		if(ans==s1){
+		    return 1;
+		}
+		return 0;
+		
+	}
+};
+------------------------------------------------------------------------------------------------------------------------
+
+Two pointer Approach -
+
+
+class Solution {
+public:
+    bool isSubSeq(string& s1, string& s2) {
+
+        int i = 0;
+        int j = 0;
+
+        while (i < s1.size() && j < s2.size()) {
+
+            if (s1[i] == s2[j]) {
+                i++;
+            }
+
+            j++;
+        }
+
+        return i == s1.size();
+    }
+};
