@@ -1,0 +1,112 @@
+class Solution {
+	public:
+	string toggleCase(string &s) {
+		
+		int n = s.size();
+		string result = "";
+		
+		for (int i = 0; i<n; i++) {
+			if (s[i] >= 65 && s[i] <91) {
+				char single_letter = s[i]+32;
+				result += single_letter;
+			}
+			else {
+				char lower_single_letter = s[i]-32;
+				result += lower_single_letter;
+			}
+			
+		}
+		return result;
+		
+	}
+};
+
+
+--------------------------------------------------------------------------------------
+codes to know -
+Example 1: Character → ASCII number
+#include <iostream>
+using namespace std;
+
+int main() {
+    char c = 'A';
+
+    cout << (int)c;
+
+    return 0;
+}
+
+Output:
+
+65
+
+Example 2: ASCII number → Character
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n = 66;
+
+    cout << (char)n;
+
+    return 0;
+}
+
+Output:
+
+B
+
+Example 3: Change a character using +
+#include <iostream>
+using namespace std;
+
+int main() {
+    char c = 'A';
+
+    c = c + 1;
+
+    cout << c;
+
+    return 0;
+}
+
+Output:
+
+B
+
+Example 4: Find the position of a letter
+#include <iostream>
+using namespace std;
+
+int main() {
+    char c = 'D';
+
+    cout << c - 'A';
+
+    return 0;
+}
+
+Output:
+
+3
+
+Example 5: Uppercase ↔ lowercase
+
+Now the one related to your problem:
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    char c = 'a';
+
+    c = c - 32;
+
+    cout << c;
+
+    return 0;
+}
+
+Output:
+
+A
