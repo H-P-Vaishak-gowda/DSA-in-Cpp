@@ -1,0 +1,56 @@
+Your Approach
+
+class Solution {
+	public:
+	bool checkPangram(string& s) {
+		int n = s.size();
+		int freq[256] = {0};
+		string collect = "";
+		
+		for (int i = 0; i<n; i++) {
+			if (s[i] != ' ') {
+				collect += s[i];
+			}
+		}
+		int k=collect.size();
+		
+		for (int i = 0; i<k; i++) {
+			freq[collect[i]]++;
+		}
+		
+		for (int i = 65; i<91; i++) {
+			if (freq[i] == 0 && freq[i + 32] == 0) {
+				return 0;
+			}
+		}
+		return 1;
+		
+	}
+};
+
+----------------------------------------------------------------------------
+Chat-gpt Approach 
+
+class Solution {
+public:
+    bool checkPangram(string& s) {
+
+        bool freq[26] = {false};
+
+        for(char c : s) {
+
+            if(c >= 'a' && c <= 'z')
+                freq[c - 'a'] = true;
+
+            else if(c >= 'A' && c <= 'Z')
+                freq[c - 'A'] = true;
+        }
+
+        for(int i = 0; i < 26; i++) {
+            if(freq[i] == false)
+                return false;
+        }
+
+        return true;
+    }
+};
