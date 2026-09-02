@@ -1,0 +1,95 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& arr) {
+
+        int n = arr.size();
+
+        vector<int> storage;
+
+        int pivot = -1;
+        int k = -1;
+        int end = -1;
+        int h = -1;
+
+        // 1. Find pivot
+        for (int i = n - 1; i > 0; i--) {
+
+            storage.push_back(arr[i]);
+
+            if (arr[i - 1] < arr[i]) {
+                pivot = arr[i - 1];
+                k = i - 1;
+                break;
+            }
+        }
+
+        // 2. No pivot means this is the largest permutation
+        if (k == -1) {
+            sort(arr.begin(), arr.end());
+            return;
+        }
+
+        // 3. Sort the elements after pivot
+        sort(storage.begin(), storage.end());
+
+        // 4. Find the smallest element greater than pivot
+        for (int j = 0; j < storage.size(); j++) {
+
+            if (storage[j] > pivot) {
+                end = storage[j];
+                break;
+            }
+        }
+
+        // 5. Find the index of 'end' in the original array
+        for (int j = k + 1; j < n; j++) {
+
+            if (arr[j] == end) {
+                h = j;
+                break;
+            }
+        }
+
+        // 6. Swap pivot and end
+        swap(arr[k], arr[h]);
+
+        // 7. Sort everything after pivot
+        sort(arr.begin() + k + 1, arr.end());
+    }
+};
+
+---------------------------------------
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& arr) {
+
+        int n = arr.size();
+
+        // 1. Find pivot
+        int k = n - 2;
+
+        while (k >= 0 && arr[k] >= arr[k + 1]) {
+            k--;
+        }
+
+        // 2. If no pivot, array is the largest permutation
+        if (k < 0) {
+            reverse(arr.begin(), arr.end());
+            return;
+        }
+
+        // 3. Find the first element from right greater than pivot
+        int h = n - 1;
+
+        while (arr[h] <= arr[k]) {
+            h--;
+        }
+
+        // 4. Swap pivot with that element
+        swap(arr[k], arr[h]);
+
+        // 5. Reverse the part after pivot
+        reverse(arr.begin() + k + 1, arr.end());
+    }
+};
