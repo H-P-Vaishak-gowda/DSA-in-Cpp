@@ -1,0 +1,47 @@
+My approach - passed 1010/1120 test cases
+
+class Solution {
+  public:
+    int maxSubarraySum(vector<int> &arr) {
+        
+        int n=arr.size();
+        vector<int> ans;
+        
+        for(int i=0;i<n;i++){
+            int add=0;
+            for(int j=i;j<n;j++){
+                
+                add+=arr[j];
+                ans.push_back(add);
+            }
+        }
+        int big=arr[0];
+        for(int k=0;k<ans.size();k++){
+            big=max(ans[k],big);
+        }
+        return big;
+    }
+};
+
+---------------------------------------------------
+
+class Solution {
+public:
+    int maxSubarraySum(vector<int> &arr) {
+
+        int current = arr[0];
+        int big = arr[0];
+
+        for (int i = 1; i < arr.size(); i++) {
+
+            current = max(arr[i], current + arr[i]);
+
+            big = max(big, current);
+        }
+
+        return big;
+    }
+};
+
+Time:  O(n)
+Space: O(1)
