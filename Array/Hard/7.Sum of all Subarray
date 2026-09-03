@@ -1,0 +1,48 @@
+My approach- passed 1110/1120 test cases;
+
+class Solution {
+	public:
+	int subarraySum(vector<int>& arr) {
+		
+		int n = arr.size();
+		vector<int> ans;
+		
+		int final_add = 0;
+		
+		for (int i = 0; i<n; i++) {
+			
+			int add = 0;
+			for (int j = i; j<n; j++) {
+				
+				add += arr[j];
+				ans.push_back(add);
+				
+			}
+			
+		}
+		
+		for (int k = 0; k<ans.size(); k++) {
+			final_add += ans[k];
+		}
+		return final_add;
+		
+	}
+};
+-------------------------------------------------------
+
+class Solution {
+public:
+    int subarraySum(vector<int>& arr) {
+
+        int n = arr.size();
+        int final_add = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            final_add += arr[i] * (i + 1) * (n - i);
+
+        }
+
+        return final_add;
+    }
+};
