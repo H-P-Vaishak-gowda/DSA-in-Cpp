@@ -1,0 +1,222 @@
+Time Complexity: O(n^2)
+Auxiliary Space: O(1)
+
+class Solution {
+public:
+    bool magicSquare(vector<vector<int>>& mat) {
+
+        long long n = mat.size();
+        long long N = n * n;
+
+        // Required magic sum
+        long long target = n * (N + 1) / 2;
+
+        // Expected sum of 1...N
+        long long expectedSum = N * (N + 1) / 2;
+
+        // Expected sum of squares: 1² + 2² + ... + N²
+        long long expectedSquareSum =
+            N * (N + 1) * (2 * N + 1) / 6;
+
+        long long totalSum = 0;
+        long long squareSum = 0;
+
+        // Check rows, values and collect sums
+        for (int i = 0; i < n; i++) {
+
+            long long rowSum = 0;
+            long long colSum = 0;
+
+            for (int j = 0; j < n; j++) {
+
+                long long x = mat[i][j];
+
+                // Must be between 1 and n²
+                if (x < 1 || x > N)
+                    return false;
+
+                rowSum += x;
+                colSum += mat[j][i];
+
+                totalSum += x;
+                squareSum += x * x;
+            }
+
+            if (rowSum != target || colSum != target)
+                return false;
+        }
+
+        // Check that elements are exactly 1...n²
+        if (totalSum != expectedSum ||
+            squareSum != expectedSquareSum)
+            return false;
+
+        // Check diagonals
+        long long diagonal1 = 0;
+        long long diagonal2 = 0;
+
+        for (int i = 0; i < n; i++) {
+            diagonal1 += mat[i][i];
+            diagonal2 += mat[i][n - 1 - i];
+        }
+
+        return diagonal1 == target && diagonal2 == target;
+    }
+};
+
+-------------------------------------------------------------------------
+
+class Solution {
+public:
+    bool magicSquare(vector<vector<int>>& mat) {
+
+        int n = mat.size();
+        vector<int> ans;
+
+        int compare_sum = 0;
+
+        // Check rows
+        for(int i = 0; i < n; i++) {
+
+            int sum = 0;
+
+            for(int j = 0; j < n; j++) {
+                sum += mat[i][j];
+                ans.push_back(mat[i][j]);
+            }
+
+            if(i == 0) {
+                compare_sum = sum;
+            }
+            else if(sum != compare_sum) {
+                return false;
+            }
+        }
+
+        // Check columns
+        for(int j = 0; j < n; j++) {
+
+            int sum = 0;
+
+            for(int i = 0; i < n; i++) {
+                sum += mat[i][j];
+            }
+
+            if(sum != compare_sum) {
+                return false;
+            }
+        }
+
+        // Check main diagonal
+        int sum = 0;
+
+        for(int i = 0; i < n; i++) {
+            sum += mat[i][i];
+        }
+
+        if(sum != compare_sum) {
+            return false;
+        }
+
+        // Check secondary diagonal
+        sum = 0;
+
+        for(int i = 0; i < n; i++) {
+            sum += mat[i][n - 1 - i];
+        }
+
+        if(sum != compare_sum) {
+            return false;
+        }
+
+        // Check numbers from 1 to n²
+        sort(ans.begin(), ans.end());
+
+        for(int i = 0; i < n * n; i++) {
+
+            if(ans[i] != i + 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
+Time  : O(n² log n)
+Space : O(n²)
+
+
+// --------------------------------------------------------
+
+class Solution {
+public:
+    bool magicSquare(vector<vector<int>>& mat) {
+
+        int n = mat.size();
+        int target = 0;
+
+        // Target sum = first row
+        for(int j = 0; j < n; j++) {
+            target += mat[0][j];
+        }
+
+        // Check rows and numbers
+        vector<bool> seen(n * n + 1, false);
+
+        for(int i = 0; i < n; i++) {
+
+            int rowSum = 0;
+
+            for(int j = 0; j < n; j++) {
+
+                int x = mat[i][j];
+
+                // Number must be from 1 to n²
+                if(x < 1 || x > n * n || seen[x]) {
+                    return false;
+                }
+
+                seen[x] = true;
+                rowSum += x;
+            }
+
+            if(rowSum != target) {
+                return false;
+            }
+        }
+
+        // Check columns
+        for(int j = 0; j < n; j++) {
+
+            int colSum = 0;
+
+            for(int i = 0; i < n; i++) {
+                colSum += mat[i][j];
+            }
+
+            if(colSum != target) {
+                return false;
+            }
+        }
+
+        // Main diagonal
+        int diagonal1 = 0;
+
+        // Secondary diagonal
+        int diagonal2 = 0;
+
+        for(int i = 0; i < n; i++) {
+
+            diagonal1 += mat[i][i];
+            diagonal2 += mat[i][n - 1 - i];
+        }
+
+        if(diagonal1 != target || diagonal2 != target) {
+            return false;
+        }
+
+        return true;
+    }
+};
+Time: O(n²)
+Auxiliary space: O(n²)
