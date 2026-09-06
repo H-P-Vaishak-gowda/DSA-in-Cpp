@@ -1,36 +1,41 @@
 My approach -passed 1110/1120 test cases;
 
 class Solution {
-  public:
-    int countIncreasing(vector<int>& arr) {
-        
-        int n=arr.size();
-        vector<vector<int>>ans;
-        
-        for(int i=0;i<n-1;i++){
-            
-            vector<int>sub_ans;
-            sub_ans.push_back(arr[i]);
-            
-            int d=i;
-            for(int j=i+1;j<n;j++){
-                
-                if(arr[d]<arr[j]){
-                    sub_ans.push_back(arr[j]);
-                    ans.push_back(sub_ans);
-                    d++;
-                }
-                else{
-                    break;
-                }
-            }
-        }
-        
-        int result=ans.size();
-        
-        return result;
-    }
+	public:
+	int countIncreasing(vector<int>& arr) {
+		
+		vector<vector<int>> ans;
+		
+		int n = arr.size();
+		
+		for (int i = 0; i<n; i++) {
+			
+  			vector<int>sub_ans;
+  			sub_ans.push_back(arr[i]);
+  			
+  			
+  			
+  			for (int j = i; j<n-1; j++) {
+  				if (arr[j]<arr[j+1]) {
+  					sub_ans.push_back(arr[j+1]);
+  					ans.push_back(sub_ans);
+  					
+  				}
+  				else{
+  				    break;
+  				}
+				
+			}
+			
+			
+		}
+		int k = ans.size();
+		return k;
+	}
+	    
+	    
 };
+
 -----------------------------------------------------------
 optimized solution
 
