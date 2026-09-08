@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    void sortByLength(vector<string>& arr) {
+        int n=arr.size();
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n-i-1;j++){
+                if(arr[j].size() >arr[j+1].size()){
+                    swap(arr[j],arr[j+1]);
+                }
+            }
+        }
+        
+    }
+};
+Complexity	Value
+Time Complexity	O(n²)
+Auxiliary Space	O(1)
+
+---------------------------------------------------------
+class Solution {
+  public:
+    void sortByLength(vector<string>& arr){
+        stable_sort(arr.begin(),arr.end(),
+            
+            [](const string &a,const string &b){
+                return a.length()<b.length();
+            }
+        );    
+    }   
+    
+};
+Complexity	Value
+Time Complexity	O(n log n)
+Auxiliary Space	O(n) typically
+--------------------------------------------------------
+
+
